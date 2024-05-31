@@ -36,7 +36,6 @@ namespace FFPR_Fix
             waitTime *= timeScale;
             waitTimeLowLimit *= timeScale;
         }
-        }
     }
 
     public class SkipIntroPatch

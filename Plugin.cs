@@ -93,7 +93,7 @@ namespace FFPR_Fix
                  "Hack",
                  "OutBattleSpeedHackFactor",
                  1f,
-                 "Increase the game speed by X out of battle when T or L2 is pressed."
+                 "Increase the game speed by X out-of-battle when T or L2 is pressed."
             );
 
             battleSpeedHackFactor = Config.Bind(
@@ -115,6 +115,12 @@ namespace FFPR_Fix
 
         private void InjectModComponent()
         {
+            if (battleSpeedHackFactor.Value == 1f &&
+                outBattleSpeedHackFactor.Value == 1f)
+            {
+                return;
+            }
+
             ClassInjector.RegisterTypeInIl2Cpp<ModComponent>();
             var name = typeof(ModComponent).FullName;
 
