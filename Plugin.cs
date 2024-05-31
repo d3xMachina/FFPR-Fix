@@ -60,7 +60,7 @@ namespace FFPR_Fix
                  "Framerate",
                  "Uncap",
                  false,
-                 "Remove the 60 FPS limit. Use with SpecialK or Rivatuner to cap it to the intended FPS."
+                 "Remove the 60 FPS limit. Use with SpecialK or Rivatuner to cap it to the intended FPS and force VSync."
             );
 
             hideFieldMinimap = Config.Bind(

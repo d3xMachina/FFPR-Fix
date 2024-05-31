@@ -8,12 +8,29 @@ namespace FFPR_Fix
 {
     public class FrameratePatch
     {
+        static int DefaultFrameRate = 60;
+
         [HarmonyPatch(typeof(SceneBoot), nameof(SceneBoot.Start))]
         [HarmonyPostfix]
         static void UncapFramerate()
         {
             Plugin.Log.LogInfo("Uncap framerate.");
-            Application.targetFrameRate = 0;
+            if (Application.targetFrameRate != 0)
+            {
+                DefaultFrameRate = Application.targetFrameRate;
+                Application.targetFrameRate = 0;
+            }
+        }
+
+        // Mainly used by the game menus to accumulate speed when a button keep being pressed down
+        // As this is always called on frame updates, we adjust the accumulation speed to match the new framerate
+        [HarmonyPatch(typeof(Il2CppSystem.Common.TimeFunction), nameof(Il2CppSystem.Common.TimeFunction.Function))]
+        [HarmonyPrefix]
+        static void TimeFunctionFix(Il2CppSystem.Action action, float waitTime, ref float acceleration, float waitTimeLowLimit, bool isAffectedTimeScale)
+        {
+            var rate = DefaultFrameRate / (1.0f / Time.unscaledDeltaTime);
+            acceleration *= rate;
+        }
         }
     }
 
