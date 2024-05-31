@@ -26,10 +26,15 @@ namespace FFPR_Fix
         // As this is always called on frame updates, we adjust the accumulation speed to match the new framerate
         [HarmonyPatch(typeof(Il2CppSystem.Common.TimeFunction), nameof(Il2CppSystem.Common.TimeFunction.Function))]
         [HarmonyPrefix]
-        static void TimeFunctionFix(Il2CppSystem.Action action, float waitTime, ref float acceleration, float waitTimeLowLimit, bool isAffectedTimeScale)
+        static void TimeFunctionFix(Il2CppSystem.Action action, ref float waitTime, ref float acceleration, ref float waitTimeLowLimit, bool isAffectedTimeScale)
         {
-            var rate = DefaultFrameRate / (1.0f / Time.unscaledDeltaTime);
+            var rate = DefaultFrameRate / (1f / Time.unscaledDeltaTime);
             acceleration *= rate;
+
+            // Fix fast input when the speedhack is enabled
+            float timeScale = Time.timeScale;
+            waitTime *= timeScale;
+            waitTimeLowLimit *= timeScale;
         }
         }
     }
