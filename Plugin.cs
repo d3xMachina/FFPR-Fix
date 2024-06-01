@@ -17,6 +17,7 @@ namespace FFPR_Fix
         public static ConfigEntry<bool> hideFieldMinimap;
         public static ConfigEntry<bool> hideWorldMinimap;
         public static ConfigEntry<bool> skipSplashscreens;
+        public static ConfigEntry<bool> skipPressAnyKey;
         public static ConfigEntry<float> playerMovespeed;
         public static ConfigEntry<float> outBattleSpeedHackFactor;
         public static ConfigEntry<float> battleSpeedHackFactor;
@@ -46,7 +47,7 @@ namespace FFPR_Fix
                 Harmony.CreateAndPatchAll(typeof(UIPatch));
             }
 
-            if (skipSplashscreens.Value)
+            if (skipSplashscreens.Value || skipPressAnyKey.Value)
             {
                 Harmony.CreateAndPatchAll(typeof(SkipIntroPatch));
             }
@@ -87,6 +88,13 @@ namespace FFPR_Fix
                  "SkipSplashscreens",
                  true,
                  "Skip the intro splashscreens."
+            );
+
+            skipPressAnyKey = Config.Bind(
+                 "Skip intro",
+                 "SkipPressAnyKey",
+                 false,
+                 "Skip the intro movie and the \"Press any key\" before the title screen."
             );
 
             outBattleSpeedHackFactor = Config.Bind(

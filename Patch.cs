@@ -2,6 +2,7 @@
 using Last.Entity.Field;
 using Last.Map;
 using Last.UI;
+using Last.UI.KeyInput;
 using UnityEngine;
 
 namespace FFPR_Fix
@@ -47,7 +48,20 @@ namespace FFPR_Fix
             if (Plugin.skipSplashscreens.Value)
             {
                 Plugin.Log.LogInfo("Skip splashscreen.");
-                __instance.stateMachine.Change(SplashController.State.Title);
+                __instance.stateMachine?.Change(SplashController.State.Title);
+            }
+        }
+
+        [HarmonyPatch(typeof(TitleWindowController), nameof(TitleWindowController.UpdateNone))]
+        [HarmonyPostfix]
+        static void SkipPressAnyKey(TitleWindowController __instance)
+        {
+            if (Plugin.skipPressAnyKey.Value)
+            {
+                if (Last.Scene.SceneTitle.PreloadIsFinished())
+                {
+                    __instance.stateMachine?.Change(TitleWindowController.State.Select);
+                }
             }
         }
     }
@@ -84,7 +98,6 @@ namespace FFPR_Fix
             }
         }
         
-
         [HarmonyPatch(typeof(FieldPlayer), nameof(FieldPlayer.GetMoveSpeed))]
         [HarmonyPostfix]
         static void PlayerMovespeed(ref FieldPlayer __instance, ref float __result)
