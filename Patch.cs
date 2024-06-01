@@ -15,10 +15,21 @@ namespace FFPR_Fix
         [HarmonyPostfix]
         static void UncapFramerate()
         {
-            Plugin.Log.LogInfo("Uncap framerate.");
             if (Application.targetFrameRate != 0)
             {
                 DefaultFrameRate = Application.targetFrameRate;
+
+                if (Plugin.enableVsync.Value)
+                {
+                    Plugin.Log.LogInfo("VSync enabled.");
+                    QualitySettings.vSyncCount = 1;
+                }
+                else
+                {
+                    Plugin.Log.LogInfo("Uncap framerate.");
+                    QualitySettings.vSyncCount = 0;
+                }
+
                 Application.targetFrameRate = 0;
             }
         }

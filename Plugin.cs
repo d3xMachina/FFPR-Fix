@@ -8,12 +8,13 @@ using UnityEngine;
 
 namespace FFPR_Fix
 {
-    [BepInPlugin("d3xMachina.ffpr_fix", "FFPR Fix", "1.1.0")]
+    [BepInPlugin("d3xMachina.ffpr_fix", "FFPR Fix", "1.1.1")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
 
         public static ConfigEntry<bool> uncapFPS;
+        public static ConfigEntry<bool> enableVsync;
         public static ConfigEntry<bool> hideFieldMinimap;
         public static ConfigEntry<bool> hideWorldMinimap;
         public static ConfigEntry<bool> skipSplashscreens;
@@ -37,7 +38,7 @@ namespace FFPR_Fix
 
         private void ApplyPatches()
         {
-            if (uncapFPS.Value)
+            if (uncapFPS.Value || enableVsync.Value)
             {
                 Harmony.CreateAndPatchAll(typeof(FrameratePatch));
             }
@@ -66,7 +67,14 @@ namespace FFPR_Fix
                  "Framerate",
                  "Uncap",
                  false,
-                 "Remove the 60 FPS limit. Use with SpecialK or Rivatuner to cap it to the intended FPS and force VSync."
+                 "Remove the 60 FPS limit. Use with SpecialK or Rivatuner to cap it to the intended FPS for best frame pacing."
+            );
+
+            enableVsync = Config.Bind(
+                 "Framerate",
+                 "Vsync",
+                 false,
+                 "Enable VSync. The framerate will match your monitor refresh rate."
             );
 
             hideFieldMinimap = Config.Bind(
