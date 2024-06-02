@@ -95,8 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModConfiguration.cs" />
     <Compile Include="ModComponent.cs" />
-    <Compile Include="Patch.cs" />
+    <Compile Include="Patches\FrameRate.cs" />
+    <Compile Include="Patches\HideMinimap.cs" />
+    <Compile Include="Patches\PlayerMoveSpeed.cs" />
+    <Compile Include="Patches\SkipIntro.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

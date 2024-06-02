@@ -1,4 +1,5 @@
 ﻿using System;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,25 @@ public sealed class ModComponent : MonoBehaviour
 
     public ModComponent(IntPtr ptr) : base(ptr) { }
 
+    public static void Inject()
+    {
+        ClassInjector.RegisterTypeInIl2Cpp<ModComponent>();
+        var name = typeof(ModComponent).FullName;
+
+        Plugin.Log.LogInfo($"Initializing game object {name}");
+        var modObject = new GameObject(name);
+        modObject.hideFlags = HideFlags.HideAndDontSave;
+        GameObject.DontDestroyOnLoad(modObject);
+
+        Plugin.Log.LogInfo($"Adding {name} to game object...");
+        ModComponent component = modObject.AddComponent<ModComponent>();
+        if (component == null)
+        {
+            GameObject.Destroy(modObject);
+            Plugin.Log.LogError($"The game object is missing the required component: {name}");
+        }
+    }
+
     public void Awake()
     {
         try
@@ -26,40 +46,6 @@ public sealed class ModComponent : MonoBehaviour
         {
             _isDisabled = true;
             Plugin.Log.LogError($"[{nameof(ModComponent)}].{nameof(Awake)}(): {e}");
-        }
-    }
-
-    private void UpdateTimeScale()
-    {
-        float newTimeScale = defaultTimeScale;
-        float newBattleSpeed = defaultTimeScale;
-
-        var triggerL = Gamepad.current.leftTrigger.ReadValue();
-        //Plugin.Log.LogInfo("Trigger value: " + triggerL);
-
-        if (triggerL >= 0.90f || Input.GetKeyDown(KeyCode.T))
-        {
-            //Plugin.Log.LogInfo("Key down!");
-            newTimeScale *= Plugin.outBattleSpeedHackFactor.Value;
-            newBattleSpeed *= Plugin.battleSpeedHackFactor.Value;
-        }
-
-        if (Plugin.outBattleSpeedHackFactor.Value != 1f && Time.timeScale != 0f)
-        {
-            Time.timeScale = newTimeScale;
-        }
-
-        if (Plugin.battleSpeedHackFactor.Value != 1f)
-        {
-            var battlePlugManager = Last.Battle.BattlePlugManager.instance;
-            if (battlePlugManager != null)
-            {
-                var battleOption = battlePlugManager.BattleOption;
-                if (battleOption != null && battleOption.GetGameSpeed() != 0f)
-                {
-                    battleOption.SetGameSpeed(newBattleSpeed);
-                }
-            }
         }
     }
 
@@ -79,6 +65,40 @@ public sealed class ModComponent : MonoBehaviour
         {
             _isDisabled = true;
             Plugin.Log.LogError($"[{nameof(ModComponent)}].{nameof(Update)}(): {e}");
+        }
+    }
+
+    private void UpdateTimeScale()
+    {
+        float newTimeScale = defaultTimeScale;
+        float newBattleSpeed = defaultTimeScale;
+
+        var triggerL = Gamepad.current.leftTrigger.ReadValue();
+        //Plugin.Log.LogInfo("Trigger value: " + triggerL);
+
+        if (triggerL >= 0.90f || Input.GetKeyDown(KeyCode.T))
+        {
+            //Plugin.Log.LogInfo("Key down!");
+            newTimeScale *= Plugin.Config.outBattleSpeedHackFactor.Value;
+            newBattleSpeed *= Plugin.Config.battleSpeedHackFactor.Value;
+        }
+
+        if (Plugin.Config.outBattleSpeedHackFactor.Value != 1f && Time.timeScale != 0f)
+        {
+            Time.timeScale = newTimeScale;
+        }
+
+        if (Plugin.Config.battleSpeedHackFactor.Value != 1f)
+        {
+            var battlePlugManager = Last.Battle.BattlePlugManager.instance;
+            if (battlePlugManager != null)
+            {
+                var battleOption = battlePlugManager.BattleOption;
+                if (battleOption != null && battleOption.GetGameSpeed() != 0f)
+                {
+                    battleOption.SetGameSpeed(newBattleSpeed);
+                }
+            }
         }
     }
 }
