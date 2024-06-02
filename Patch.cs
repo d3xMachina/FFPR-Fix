@@ -9,15 +9,13 @@ namespace FFPR_Fix
 {
     public class FrameratePatch
     {
-        static int DefaultFrameRate = 60;
-
         [HarmonyPatch(typeof(SceneBoot), nameof(SceneBoot.Start))]
         [HarmonyPostfix]
         static void UncapFramerate()
         {
             if (Application.targetFrameRate != 0)
             {
-                DefaultFrameRate = Application.targetFrameRate;
+                ModComponent.Instance.DefaultFrameRate = Application.targetFrameRate;
 
                 if (Plugin.enableVsync.Value)
                 {
@@ -40,8 +38,8 @@ namespace FFPR_Fix
         [HarmonyPrefix]
         static void TimeFunctionFix(Il2CppSystem.Action action, ref float waitTime, ref float acceleration, ref float waitTimeLowLimit, bool isAffectedTimeScale)
         {
-            var rate = DefaultFrameRate / (1f / Time.unscaledDeltaTime);
-            acceleration *= rate;
+            var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / Time.unscaledDeltaTime);
+            acceleration *= rateFix;
 
             // Fix fast input when the speedhack is enabled
             float timeScale = Time.timeScale;
