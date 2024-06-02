@@ -3,6 +3,7 @@ using BepInEx.IL2CPP;
 using BepInEx.Logging;
 using FFPR_Fix.Patches;
 using HarmonyLib;
+using System;
 
 namespace FFPR_Fix;
 
@@ -16,6 +17,7 @@ public partial class Plugin : BasePlugin
     {
         Log = base.Log;
 
+        Log.LogInfo($"Game detected: {GameDetection.Version}");
         Log.LogInfo("Loading...");
 
         Config = new ModConfiguration(base.Config);
@@ -28,26 +30,42 @@ public partial class Plugin : BasePlugin
 
     private void ApplyPatches()
     {
+        var version = GameDetection.Version;
+
         if (Config.uncapFPS.Value || Config.enableVsync.Value)
         {
-            Harmony.CreateAndPatchAll(typeof(FrameratePatch));
+            ApplyPatch(typeof(FrameratePatch));
+            ApplyPatch(typeof(AirshipRotatePatch));
+            ApplyPatch(typeof(ChocoboRotatePatch), GameVersion.FF3 | GameVersion.FF5 | GameVersion.FF6);
         }
 
         if (Config.hideFieldMinimap.Value || Config.hideWorldMinimap.Value)
         {
-            Harmony.CreateAndPatchAll(typeof(HideMinimapPatch));
+            ApplyPatch(typeof(HideMinimapPatch));
         }
 
         if (Config.skipSplashscreens.Value || Config.skipPressAnyKey.Value)
         {
-            Harmony.CreateAndPatchAll(typeof(SkipIntroPatch));
+            ApplyPatch(typeof(SkipIntroPatch));
         }
 
         /* Crash because of a bug with BepInEx and Il2CppSystem.Nullable in methods
         if (playerMovespeed.Value > 0f)
         {
-            Harmony.CreateAndPatchAll(typeof(PlayerMoveSpeedPatch));
+            ApplyPatch(typeof(PlayerMoveSpeedPatch));
         }
         */
+    }
+
+    private void ApplyPatch(Type type, GameVersion versionsFlag = GameVersion.Any)
+    {
+        if ((GameDetection.Version & versionsFlag) != GameDetection.Version)
+        {
+            return;
+        }
+
+        Log.LogInfo($"Patching {type.Name}...");
+
+        Harmony.CreateAndPatchAll(type);
     }
 }

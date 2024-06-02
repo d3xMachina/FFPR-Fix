@@ -60,6 +60,7 @@
     <Reference Include="Il2CppSystem.Core">
       <HintPath>$(GamePath)\BepInEx\unhollowed\Il2CppSystem.Core.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="UnhollowerBaseLib">
       <HintPath>$(GamePath)\BepInEx\core\UnhollowerBaseLib.dll</HintPath>
     </Reference>
@@ -95,10 +96,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDetection.cs" />
     <Compile Include="ModConfiguration.cs" />
     <Compile Include="ModComponent.cs" />
     <Compile Include="Patches\FrameRate.cs" />
     <Compile Include="Patches\HideMinimap.cs" />
+    <Compile Include="Patches\MountRotateSpeed.cs" />
     <Compile Include="Patches\PlayerMoveSpeed.cs" />
     <Compile Include="Patches\SkipIntro.cs" />
     <Compile Include="Plugin.cs" />
