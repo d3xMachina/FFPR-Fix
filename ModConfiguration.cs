@@ -89,14 +89,14 @@ public sealed class ModConfiguration
         );
 
         chocoboTurnFactor = _config.Bind(
-             "Hack",
+             "Camera",
              "ChocoboTurnFactor",
              1f,
              "Increase or decrease the camera turn speed when on a chocobo by X."
         );
 
         airshipTurnFactor = _config.Bind(
-             "Hack",
+             "Camera",
              "AirshipTurnFactor",
              1f,
              "Increase or decrease the camera turn speed when on an airship by X."
