@@ -65,12 +65,10 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(BattleWaitPlayerCommand), GameVersion.FF4 | GameVersion.FF5 | GameVersion.FF6);
         }
 
-        /* Crash because of a bug with BepInEx and Il2CppSystem.Nullable in methods
-        if (playerMovespeed.Value > 0f)
+        if (Config.playerWalkspeed.Value > 0f)
         {
             ApplyPatch(typeof(PlayerMoveSpeedPatch));
         }
-        */
     }
 
     private void ApplyPatch(Type type, GameVersion versionsFlag = GameVersion.Any)

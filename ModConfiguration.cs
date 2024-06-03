@@ -11,7 +11,7 @@ public sealed class ModConfiguration
     public ConfigEntry<bool> hideWorldMinimap;
     public ConfigEntry<bool> skipSplashscreens;
     public ConfigEntry<bool> skipPressAnyKey;
-    public ConfigEntry<float> playerMovespeed;
+    public ConfigEntry<float> playerWalkspeed;
     public ConfigEntry<float> outBattleSpeedHackFactor;
     public ConfigEntry<float> battleSpeedHackFactor;
     public ConfigEntry<float> chocoboTurnFactor;
@@ -102,13 +102,11 @@ public sealed class ModConfiguration
              "Increase or decrease the camera turn speed when on an airship by X."
         );
 
-        /*
-        playerMovespeed = _config.Bind(
+        playerWalkspeed = _config.Bind(
              "Player",
-             "PlayerMovespeed",
-             -1f,
-             "Change the player movement speed on the field (game default is 0.24, SNES is 0.32)."
+             "PlayerWalkspeed",
+             0f,
+             "Change the player movement speed on the field (game default is 0.24, SNES is 0.32). Set to 0.32 to avoid stutters at 60fps."
         );
-        */
     }
 }
