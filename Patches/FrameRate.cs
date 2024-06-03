@@ -34,14 +34,25 @@ public class FrameratePatch
     // As this is always called on frame updates, we adjust the accumulation speed to match the new framerate
     [HarmonyPatch(typeof(TimeFunction), nameof(TimeFunction.Function))]
     [HarmonyPrefix]
-    static void TimeFunctionFix(Action action, ref float waitTime, ref float acceleration, ref float waitTimeLowLimit, bool isAffectedTimeScale)
+    static bool TimeFunctionFix(TimeFunction __instance, Action action, float waitTime, float acceleration, float waitTimeLowLimit, bool isAffectedTimeScale)
     {
-        var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / Time.unscaledDeltaTime);
-        acceleration *= rateFix;
+        var deltaTime = Time.unscaledDeltaTime;
+        __instance.checkTime += deltaTime;
 
-        // Fix fast input when the speedhack is enabled
-        float timeScale = Time.timeScale;
-        waitTime *= timeScale;
-        waitTimeLowLimit *= timeScale;
+        var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / deltaTime);
+        var waitTimeRemaining = waitTime - (__instance.Acceleration * rateFix);
+        if (waitTime != 0f && waitTimeRemaining <= waitTimeLowLimit)
+        {
+            waitTimeRemaining = waitTimeLowLimit;
+        }
+
+        if (waitTimeRemaining <= __instance.checkTime)
+        {
+            action?.Invoke();
+            __instance.checkTime = 0f;
+        }
+
+        __instance.Acceleration += acceleration;
+        return false;
     }
 }
