@@ -4,10 +4,11 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 
 ## Features
 
-- Uncap framerate.
-- Skip intro splashscreens.
-- Hide the field minimap.
-- Hide the world minimap.
+- Uncap framerate (and fix input issues from higher framerate).
+- Skip the intro splashscreens and the following "press any key".
+- Hide the field and world minimaps separately.
+- Speedup the game (speedhack).
+- Change the camera turn speed on a chocobo and on an airship.
 
 ## Installation
 
