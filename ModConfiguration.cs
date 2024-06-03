@@ -105,8 +105,8 @@ public sealed class ModConfiguration
         playerWalkspeed = _config.Bind(
              "Player",
              "PlayerWalkspeed",
-             0f,
-             "Change the player movement speed on the field (game default is 0.24, SNES is 0.32). Set to 0.32 to avoid stutters at 60fps."
+             1f,
+             "Change the player movement speed on the field (SNES is 0.75). Set to 0.75 to avoid stutters at 60fps."
         );
     }
 }

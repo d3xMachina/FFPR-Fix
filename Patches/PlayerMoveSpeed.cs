@@ -9,12 +9,10 @@ public class PlayerMoveSpeedPatch
     [HarmonyPostfix]
     static void ChangeWalkSpeed(FieldPlayer __instance)
     {
-        var moveSecondsPerCell = __instance.GetMoveSpeed() * __instance.EntityMoveMagnification;
-
         if (__instance.moveState == FieldPlayerConstants.MoveState.Walk ||
             __instance.moveState == FieldPlayerConstants.MoveState.Dush)
         {
-            __instance.EntityMoveMagnification *= moveSecondsPerCell / Plugin.Config.playerWalkspeed.Value;
+            __instance.EntityMoveMagnification *= Plugin.Config.playerWalkspeed.Value;
         }
     }
     

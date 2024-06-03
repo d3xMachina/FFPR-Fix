@@ -65,7 +65,7 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(BattleWaitPlayerCommand), GameVersion.FF4 | GameVersion.FF5 | GameVersion.FF6);
         }
 
-        if (Config.playerWalkspeed.Value > 0f)
+        if (Config.playerWalkspeed.Value > 0f && Config.playerWalkspeed.Value != 1f)
         {
             ApplyPatch(typeof(PlayerMoveSpeedPatch));
         }
