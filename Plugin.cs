@@ -60,6 +60,11 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(SkipIntroPatch));
         }
 
+        if (Config.battleWaitPlayerCommand.Value)
+        {
+            ApplyPatch(typeof(BattleWaitPlayerCommand), GameVersion.FF4 | GameVersion.FF5 | GameVersion.FF6);
+        }
+
         /* Crash because of a bug with BepInEx and Il2CppSystem.Nullable in methods
         if (playerMovespeed.Value > 0f)
         {

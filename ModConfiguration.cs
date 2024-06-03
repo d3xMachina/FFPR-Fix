@@ -16,6 +16,7 @@ public sealed class ModConfiguration
     public ConfigEntry<float> battleSpeedHackFactor;
     public ConfigEntry<float> chocoboTurnFactor;
     public ConfigEntry<float> airshipTurnFactor;
+    public ConfigEntry<bool> battleWaitPlayerCommand;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -78,6 +79,13 @@ public sealed class ModConfiguration
              "BattleSpeedHackFactor",
              1f,
              "Increase or decrease the game speed by X in battle when T or L2 is pressed."
+        );
+
+        battleWaitPlayerCommand = _config.Bind(
+             "Hack",
+             "BattleWaitPlayerCommand",
+             false,
+             "Prevent the enemies from attacking during your turn."
         );
 
         chocoboTurnFactor = _config.Bind(
