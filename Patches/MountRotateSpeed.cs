@@ -14,9 +14,11 @@ public abstract class MountRotate
     }
 
     // Calculate and adjust the rotation accelerator to match the framerate for the chocobo and the airship
-    protected static MountRotateData HandleMountRotation(FieldPlayerController controller, MountRotateData rotateData, float inputX)
+    protected static MountRotateData HandleMountRotation(FieldPlayerController controller, MountRotateData rotateData, float inputX, float customRate)
     {
         var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / Time.unscaledDeltaTime);
+        rateFix *= customRate;
+
         var rotateScale = 1f;
         if (inputX < 0) rotateScale = rotateData.left;
         if (inputX > 0) rotateScale = rotateData.right;
@@ -60,7 +62,7 @@ public class ChocoboRotatePatch : MountRotate
         };
 
         // Backup the rotate values
-        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x);
+        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.chocoboTurnFactor.Value);
 
         // Skip the rotation code in the game method as we handled it
         __instance.rotateAccelerator = 0f;
@@ -94,7 +96,7 @@ public class AirshipRotatePatch : MountRotate
         };
 
         // Backup the rotate values
-        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x);
+        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.airshipTurnFactor.Value);
 
         // Skip the rotation code in the game method as we handled it
         __instance.rotateAccelerator = 0f;

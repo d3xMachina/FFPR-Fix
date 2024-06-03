@@ -14,6 +14,8 @@ public sealed class ModConfiguration
     public ConfigEntry<float> playerMovespeed;
     public ConfigEntry<float> outBattleSpeedHackFactor;
     public ConfigEntry<float> battleSpeedHackFactor;
+    public ConfigEntry<float> chocoboTurnFactor;
+    public ConfigEntry<float> airshipTurnFactor;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -68,14 +70,28 @@ public sealed class ModConfiguration
              "Hack",
              "OutBattleSpeedHackFactor",
              1f,
-             "Increase the game speed by X out-of-battle when T or L2 is pressed."
+             "Increase or decrease the game speed by X out-of-battle when T or L2 is pressed."
         );
 
         battleSpeedHackFactor = _config.Bind(
              "Hack",
              "BattleSpeedHackFactor",
              1f,
-             "Increase the game speed by X in battle when T or L2 is pressed."
+             "Increase or decrease the game speed by X in battle when T or L2 is pressed."
+        );
+
+        chocoboTurnFactor = _config.Bind(
+             "Hack",
+             "ChocoboTurnFactor",
+             1f,
+             "Increase or decrease the camera turn speed when on a chocobo by X."
+        );
+
+        airshipTurnFactor = _config.Bind(
+             "Hack",
+             "AirshipTurnFactor",
+             1f,
+             "Increase or decrease the camera turn speed when on an airship by X."
         );
 
         /*

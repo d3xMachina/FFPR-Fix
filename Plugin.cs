@@ -31,10 +31,21 @@ public partial class Plugin : BasePlugin
     private void ApplyPatches()
     {
         var version = GameDetection.Version;
+        bool mountRotatePatch = false;
 
         if (Config.uncapFPS.Value || Config.enableVsync.Value)
         {
             ApplyPatch(typeof(FrameratePatch));
+            mountRotatePatch = true;
+        }
+
+        if (Config.chocoboTurnFactor.Value != 1f || Config.airshipTurnFactor.Value != 1f)
+        {
+            mountRotatePatch = true;
+        }
+
+        if (mountRotatePatch)
+        {
             ApplyPatch(typeof(AirshipRotatePatch));
             ApplyPatch(typeof(ChocoboRotatePatch), GameVersion.FF3 | GameVersion.FF5 | GameVersion.FF6);
         }

@@ -25,6 +25,7 @@ public class SkipIntroPatch
         {
             if (Last.Scene.SceneTitle.PreloadIsFinished())
             {
+                Plugin.Log.LogInfo("Skip \"press any key\".");
                 __instance.stateMachine?.Change(TitleWindowController.State.Select);
             }
         }
