@@ -9,7 +9,8 @@ public sealed class ModComponent : MonoBehaviour
 {
     public static ModComponent Instance { get; private set; }
     private bool _isDisabled;
-    private float defaultTimeScale;
+    private float _lastGameTimeScale = 1f;
+    private float _lastTimeScale = 1f;
     public int DefaultFrameRate = 60;
 
     public ModComponent(IntPtr ptr) : base(ptr) { }
@@ -38,7 +39,8 @@ public sealed class ModComponent : MonoBehaviour
         try
         {
             Instance = this;
-            defaultTimeScale = Time.timeScale;
+            _lastGameTimeScale = Time.timeScale;
+            _lastTimeScale = _lastGameTimeScale;
 
             Plugin.Log.LogInfo($"[{nameof(ModComponent)}].{nameof(Awake)}: Processed successfully.");
         }
@@ -49,7 +51,7 @@ public sealed class ModComponent : MonoBehaviour
         }
     }
 
-    public void Update()
+    public void LateUpdate()
     {
         try
         {
@@ -64,41 +66,36 @@ public sealed class ModComponent : MonoBehaviour
         catch (Exception e)
         {
             _isDisabled = true;
-            Plugin.Log.LogError($"[{nameof(ModComponent)}].{nameof(Update)}(): {e}");
+            Plugin.Log.LogError($"[{nameof(ModComponent)}].{nameof(LateUpdate)}(): {e}");
         }
     }
 
     private void UpdateTimeScale()
     {
-        float newTimeScale = defaultTimeScale;
-        float newBattleSpeed = defaultTimeScale;
-
-        var triggerL = Gamepad.current.leftTrigger.ReadValue();
-        //Plugin.Log.LogInfo("Trigger value: " + triggerL);
-
-        if (triggerL >= 0.90f || Input.GetKeyDown(KeyCode.T))
+        var timeScale = Time.timeScale;
+        if (timeScale == 0f)
         {
-            //Plugin.Log.LogInfo("Key down!");
-            newTimeScale *= Plugin.Config.outBattleSpeedHackFactor.Value;
-            newBattleSpeed *= Plugin.Config.battleSpeedHackFactor.Value;
+            // Game paused
+            return;
         }
 
-        if (Plugin.Config.outBattleSpeedHackFactor.Value != 1f && Time.timeScale != 0f)
-        {
-            Time.timeScale = newTimeScale;
-        }
+        var gameTimeScale = timeScale != _lastTimeScale ? timeScale : _lastGameTimeScale; 
+        var newTimeScale = gameTimeScale;
 
-        if (Plugin.Config.battleSpeedHackFactor.Value != 1f)
+        var leftTrigger = Gamepad.current.leftTrigger.ReadValue();
+        if (leftTrigger >= 0.90f || Input.GetKeyDown(KeyCode.T))
         {
-            var battlePlugManager = Last.Battle.BattlePlugManager.instance;
-            if (battlePlugManager != null)
+            var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
+            var speedHackFactor = isBattle ? Plugin.Config.battleSpeedHackFactor.Value : Plugin.Config.outBattleSpeedHackFactor.Value;
+            if (speedHackFactor > 0f)
             {
-                var battleOption = battlePlugManager.BattleOption;
-                if (battleOption != null && battleOption.GetGameSpeed() != 0f)
-                {
-                    battleOption.SetGameSpeed(newBattleSpeed);
-                }
+                newTimeScale *= speedHackFactor;
             }
         }
+
+        _lastGameTimeScale = gameTimeScale;
+        _lastTimeScale = newTimeScale;
+
+        Time.timeScale = newTimeScale;
     }
 }
