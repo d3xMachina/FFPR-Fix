@@ -11,6 +11,7 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 - Change the camera turn speed on a chocobo and on an airship.
 - Prevent enemies from attacking during your turn.
 - Speedup the game (speedhack).
+- Allow running on the world map.
 
 ## Installation
 

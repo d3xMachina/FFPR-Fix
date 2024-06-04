@@ -17,6 +17,7 @@ public sealed class ModConfiguration
     public ConfigEntry<float> chocoboTurnFactor;
     public ConfigEntry<float> airshipTurnFactor;
     public ConfigEntry<bool> battleWaitPlayerCommand;
+    public ConfigEntry<bool> runOnWorldMap;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -107,6 +108,13 @@ public sealed class ModConfiguration
              "PlayerWalkspeed",
              1f,
              "Change the player movement speed on the field (SNES is 0.75). Set to 0.75 to avoid stutters at 60fps."
+        );
+
+        runOnWorldMap = _config.Bind(
+             "Player",
+             "RunOnWorldMap",
+             false,
+             "Allow the player to run when on the world map."
         );
     }
 }

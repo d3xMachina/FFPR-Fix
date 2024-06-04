@@ -69,6 +69,11 @@ public partial class Plugin : BasePlugin
         {
             ApplyPatch(typeof(PlayerMoveSpeedPatch));
         }
+
+        if (Config.runOnWorldMap.Value)
+        {
+            ApplyPatch(typeof(RunOnWorldMap));
+        }
     }
 
     private void ApplyPatch(Type type, GameVersion versionsFlag = GameVersion.Any)

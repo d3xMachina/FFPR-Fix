@@ -104,6 +104,7 @@
     <Compile Include="Patches\HideMinimap.cs" />
     <Compile Include="Patches\MountRotateSpeed.cs" />
     <Compile Include="Patches\PlayerMoveSpeed.cs" />
+    <Compile Include="Patches\RunOnWorldMap.cs" />
     <Compile Include="Patches\SkipIntro.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
