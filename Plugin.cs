@@ -7,7 +7,7 @@ using System;
 
 namespace FFPR_Fix;
 
-[BepInPlugin("d3xMachina.ffpr_fix", "FFPR Fix", "1.1.2")]
+[BepInPlugin("d3xMachina.ffpr_fix", "FFPR Fix", "1.2.0")]
 public partial class Plugin : BasePlugin
 {
     public static new ManualLogSource Log;
