@@ -76,7 +76,6 @@ public class RunOnWorldMap
         mapUIManager.AutoDashOperationSwitch(!autoDash);
     }
 
-    // The input key can be missing if you start a save on a chocobo before reaching a town for example, so we add it if necessary
     [HarmonyPatch(typeof(FieldMap), nameof(FieldMap.UpdatePlayerStatePlay))]
     [HarmonyPrefix]
     static void AddAutoDashKeybind(FieldMap __instance)
