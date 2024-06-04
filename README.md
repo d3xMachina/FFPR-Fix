@@ -12,6 +12,7 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 - Prevent enemies from attacking during your turn.
 - Speedup the game (speedhack).
 - Allow running on the world map.
+- Disable diagonal movements like on the SNES.
 
 ## Installation
 

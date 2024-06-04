@@ -74,6 +74,11 @@ public partial class Plugin : BasePlugin
         {
             ApplyPatch(typeof(RunOnWorldMap));
         }
+
+        if (Config.disableDiagonalMovements.Value)
+        {
+            ApplyPatch(typeof(DisableDiagonalMovements));
+        }
     }
 
     private void ApplyPatch(Type type, GameVersion versionsFlag = GameVersion.Any)

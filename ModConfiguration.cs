@@ -18,6 +18,7 @@ public sealed class ModConfiguration
     public ConfigEntry<float> airshipTurnFactor;
     public ConfigEntry<bool> battleWaitPlayerCommand;
     public ConfigEntry<bool> runOnWorldMap;
+    public ConfigEntry<bool> disableDiagonalMovements;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -104,17 +105,24 @@ public sealed class ModConfiguration
         );
 
         playerWalkspeed = _config.Bind(
-             "Player",
+             "Movement",
              "PlayerWalkspeed",
              1f,
-             "Change the player movement speed on the field (SNES is 0.75). Set to 0.75 to avoid stutters at 60fps."
+             "Change the player movement speed on the field (SNES is 0.75). Set to 0.75 and enable DisableDiagonalMovements to avoid stutters at 60fps."
         );
 
         runOnWorldMap = _config.Bind(
-             "Player",
+             "Movement",
              "RunOnWorldMap",
              false,
              "Allow the player to run when on the world map."
+        );
+
+        disableDiagonalMovements = _config.Bind(
+             "Movement",
+             "DisableDiagonalMovements",
+             false,
+             "Restrict the movements to 4 directions instead of 8, like on the SNES."
         );
     }
 }

@@ -9,9 +9,15 @@ public sealed class ModComponent : MonoBehaviour
 {
     public static ModComponent Instance { get; private set; }
     private bool _isDisabled;
+
     private float _lastGameTimeScale = 1f;
     private float _lastTimeScale = 1f;
+
     public int DefaultFrameRate = 60;
+
+    public Vector2 LastPadAxis = new();
+    public Vector2 LastPadAxisSanitized = new();
+    public bool ProcessPadNoInput = false;
 
     public ModComponent(IntPtr ptr) : base(ptr) { }
 
