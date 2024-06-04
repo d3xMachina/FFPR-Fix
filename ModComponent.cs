@@ -89,7 +89,7 @@ public sealed class ModComponent : MonoBehaviour
         var newTimeScale = gameTimeScale;
 
         var leftTrigger = Gamepad.current.leftTrigger.ReadValue();
-        if (leftTrigger >= 0.90f || Input.GetKeyDown(KeyCode.T))
+        if (leftTrigger >= 0.90f || Input.GetKey(KeyCode.T))
         {
             var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
             var speedHackFactor = isBattle ? Plugin.Config.battleSpeedHackFactor.Value : Plugin.Config.outBattleSpeedHackFactor.Value;
