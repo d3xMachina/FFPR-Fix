@@ -9,7 +9,7 @@ public class RunOnWorldMap
 {
     // Activate the dash after movement inputs are processed
     [HarmonyPatch(typeof(FieldPlayerKeyController), nameof(FieldPlayerKeyController.OnTouchPadCallback))]
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     static void UpdateDashState(FieldPlayerKeyController __instance, Vector2 axis)
     {
         if (axis == Vector2.zero ||
