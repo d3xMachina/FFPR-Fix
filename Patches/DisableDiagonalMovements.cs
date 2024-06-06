@@ -27,7 +27,7 @@ public class DisableDiagonalMovements
             return;
         }
 
-        var prevAxis = axis;
+        lastAxis = axis;
 
         // 2 directions pressed, in case of irresolvable conflict we ignore the input, other priorize the most recent input
         if (axis.y != 0 && axis.x != 0)
@@ -65,7 +65,6 @@ public class DisableDiagonalMovements
             }
         }
 
-        lastAxis = prevAxis;
         lastAxisSanitized = axis;
     }
 

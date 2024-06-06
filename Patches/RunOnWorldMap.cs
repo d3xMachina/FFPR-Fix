@@ -20,12 +20,9 @@ public class RunOnWorldMap
         }
 
         var dash = __instance.pressDashKey;
-        if (TryGetAutoDash(out var autoDash))
+        if (TryGetAutoDash(out var autoDash) && autoDash)
         {
-            if (autoDash)
-            {
-                dash = !__instance.pressDashKey;
-            }
+            dash = !__instance.pressDashKey;
         }
 
         var moveState = dash ? FieldPlayerConstants.MoveState.Dush : FieldPlayerConstants.MoveState.Walk;
@@ -102,15 +99,14 @@ public class RunOnWorldMap
     static bool TryGetAutoDash(out bool autoDash)
     {
         var userDataManager = Last.Management.UserDataManager.Instance();
-        if (userDataManager != null)
+        var config = userDataManager?.Config;
+        
+        if (config != null)
         {
-            var config = userDataManager.Config;
-            if (config != null)
-            {
-                autoDash = config.IsAutoDash != 0;
-                return true;
-            }
+            autoDash = config.IsAutoDash != 0;
+            return true;
         }
+
         autoDash = false;
         return false;
     }
