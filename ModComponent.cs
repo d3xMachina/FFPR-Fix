@@ -23,7 +23,7 @@ public sealed class ModComponent : MonoBehaviour
 
     public ModComponent(IntPtr ptr) : base(ptr) { }
 
-    public static void Inject()
+    public static bool Inject()
     {
         ClassInjector.RegisterTypeInIl2Cpp<ModComponent>();
         var name = typeof(ModComponent).FullName;
@@ -39,7 +39,10 @@ public sealed class ModComponent : MonoBehaviour
         {
             GameObject.Destroy(modObject);
             Plugin.Log.LogError($"The game object is missing the required component: {name}");
+            return false;
         }
+
+        return true;
     }
 
     public void Awake()

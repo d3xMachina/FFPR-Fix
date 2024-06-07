@@ -22,10 +22,10 @@ public partial class Plugin : BasePlugin
 
         Config = new ModConfiguration(base.Config);
         Config.Init();
-        ModComponent.Inject();
-        ApplyPatches();
-
-        Log.LogInfo("Patches applied!");
+        if (ModComponent.Inject())
+        {
+            ApplyPatches();
+        }
     }
 
     private void ApplyPatches()
@@ -79,6 +79,8 @@ public partial class Plugin : BasePlugin
         {
             ApplyPatch(typeof(DisableDiagonalMovements));
         }
+
+        Log.LogInfo("Patches applied!");
     }
 
     private void ApplyPatch(Type type, GameVersion versionsFlag = GameVersion.Any)
