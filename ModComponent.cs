@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Il2CppSystem.Input;
+using Il2CppSystem.Input.KeyConfig;
+using System;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace FFPR_Fix;
 
@@ -92,9 +93,9 @@ public sealed class ModComponent : MonoBehaviour
 
         var gameTimeScale = timeScale != _lastTimeScale ? timeScale : _lastGameTimeScale; 
         var newTimeScale = gameTimeScale;
-
-        var leftTrigger = Gamepad.current.leftTrigger.ReadValue();
-        if (leftTrigger >= 0.90f || Input.GetKey(KeyCode.T))
+        
+        var keyPageUp = InputListener.Instance?.GetKey(Key.PageUp, KeyValue.InputDeviceType.GamePad) ?? false;
+        if (keyPageUp || Input.GetKey(KeyCode.T))
         {
             var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
             var speedHackFactor = isBattle ? Plugin.Config.battleSpeedHackFactor.Value : Plugin.Config.outBattleSpeedHackFactor.Value;

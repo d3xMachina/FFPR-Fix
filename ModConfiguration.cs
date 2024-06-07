@@ -73,14 +73,14 @@ public sealed class ModConfiguration
              "Hack",
              "OutBattleSpeedHackFactor",
              1f,
-             "Increase or decrease the game speed by X out-of-battle when T or L2 is pressed."
+             "Increase or decrease the game speed by X out-of-battle when T or PageUp (LT/L2 by default) is pressed."
         );
 
         battleSpeedHackFactor = _config.Bind(
              "Hack",
              "BattleSpeedHackFactor",
              1f,
-             "Increase or decrease the game speed by X in battle when T or L2 is pressed."
+             "Increase or decrease the game speed by X in battle when T or PageUp (LT/L2 by default) is pressed."
         );
 
         battleWaitPlayerCommand = _config.Bind(
