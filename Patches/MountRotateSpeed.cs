@@ -16,7 +16,7 @@ public abstract class MountRotate
     // Calculate and adjust the rotation accelerator to match the framerate for the chocobo and the airship
     protected static MountRotateData HandleMountRotation(FieldPlayerController controller, MountRotateData rotateData, float inputX, float customRate)
     {
-        var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / Time.unscaledDeltaTime);
+        var rateFix = ModComponent.Instance.DefaultFrameRate * Time.unscaledDeltaTime;
         rateFix *= customRate;
 
         var rotateScale = 1f;

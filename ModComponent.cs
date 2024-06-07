@@ -14,6 +14,8 @@ public sealed class ModComponent : MonoBehaviour
     private float _lastTimeScale = 1f;
 
     public int DefaultFrameRate = 60;
+    public int LastFrameRate = 60;
+    public bool FixGetFrameRate = false;
 
     public Vector2 LastPadAxis = new();
     public Vector2 LastPadAxisSanitized = new();
