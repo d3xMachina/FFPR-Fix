@@ -19,6 +19,7 @@ public sealed class ModConfiguration
     public ConfigEntry<bool> battleWaitPlayerCommand;
     public ConfigEntry<bool> runOnWorldMap;
     public ConfigEntry<bool> disableDiagonalMovements;
+    public ConfigEntry<bool> useDecryptedSaveFiles;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -123,6 +124,13 @@ public sealed class ModConfiguration
              "DisableDiagonalMovements",
              false,
              "Restrict the movements to 4 directions instead of 8, like on the SNES."
+        );
+
+        useDecryptedSaveFiles = _config.Bind(
+             "Advanced",
+             "UseDecryptedSaveFiles",
+             false,
+             "USE AT YOUR OWN RISKS. BACKUP YOUR SAVES FIRST. The game won't encrypt the save files which will be in json format. It will only work with new saves."
         );
     }
 }

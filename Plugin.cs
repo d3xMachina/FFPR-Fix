@@ -80,6 +80,11 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(DisableDiagonalMovements));
         }
 
+        if (Config.useDecryptedSaveFiles.Value)
+        {
+            ApplyPatch(typeof(UseDecryptedSaveFiles));
+        }
+
         Log.LogInfo("Patches applied!");
     }
 

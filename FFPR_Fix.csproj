@@ -100,6 +100,7 @@
     <Compile Include="ModConfiguration.cs" />
     <Compile Include="ModComponent.cs" />
     <Compile Include="Patches\BattleWaitPlayerCommand.cs" />
+    <Compile Include="Patches\UseDecryptedSaveFiles.cs" />
     <Compile Include="Patches\FrameRate.cs" />
     <Compile Include="Patches\HideMinimap.cs" />
     <Compile Include="Patches\MountRotateSpeed.cs" />
