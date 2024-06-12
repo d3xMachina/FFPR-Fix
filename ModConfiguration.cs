@@ -17,6 +17,7 @@ public sealed class ModConfiguration
     public ConfigEntry<float> chocoboTurnFactor;
     public ConfigEntry<float> airshipTurnFactor;
     public ConfigEntry<bool> battleWaitPlayerCommand;
+    public ConfigEntry<float> battleATBSpeed;
     public ConfigEntry<bool> runOnWorldMap;
     public ConfigEntry<bool> disableDiagonalMovements;
     public ConfigEntry<bool> useDecryptedSaveFiles;
@@ -85,17 +86,24 @@ public sealed class ModConfiguration
         );
 
         battleWaitPlayerCommand = _config.Bind(
-             "Hack",
-             "BattleWaitPlayerCommand",
+             "Battle",
+             "WaitPlayerCommand",
              false,
-             "Pause the battle when it's your turn. You can resume until the next unit is ready by pressing P or Select."
+             "Pause the battle when it's your turn. You can resume until the next unit is ready by pressing P or Select. (FF4,5 and 6 only)"
+        );
+
+        battleATBSpeed = _config.Bind(
+             "Battle",
+             "ATBSpeed",
+             1f,
+             "Change the rate at which the ATB gauge fills. Best used with WaitPlayerCommand for a Turn based experience. (FF4,5 and 6 only)"
         );
 
         chocoboTurnFactor = _config.Bind(
              "Camera",
              "ChocoboTurnFactor",
              1f,
-             "Increase or decrease the camera turn speed when on a chocobo by X."
+             "Increase or decrease the camera turn speed when on a chocobo by X. (FF3,5 and 6 only)"
         );
 
         airshipTurnFactor = _config.Bind(
