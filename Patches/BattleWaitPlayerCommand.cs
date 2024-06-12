@@ -24,7 +24,7 @@ public class BattleWaitPlayerCommand
         __result = ModComponent.Instance.CurrentBattleState.IsWaiting;
     }
 
-    [HarmonyPatch(typeof(BattleController), nameof(BattleController.StartBattle), [ typeof(InstantiateManager), typeof(bool), typeof(int) ])]
+    [HarmonyPatch(typeof(BattlePlugManager), nameof(BattlePlugManager.Start))]
     [HarmonyPostfix]
     static void InitStartBattle()
     {

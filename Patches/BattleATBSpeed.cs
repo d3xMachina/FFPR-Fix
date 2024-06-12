@@ -5,18 +5,10 @@ namespace FFPR_Fix.Patches;
 
 public class BattleATBSpeed
 {
-    [HarmonyPatch(typeof(BattleController), nameof(BattleController.StartBattle), [ typeof(InstantiateManager), typeof(bool), typeof(int) ])]
+    [HarmonyPatch(typeof(BattleUtility), nameof(BattleUtility.GetBattleSpeedByConfigValue))]
     [HarmonyPostfix]
-    static void InitStartBattle()
+    static void SetATBSpeed(ref float __result)
     {
-        var battlePlugManager = BattlePlugManager.Instance();
-        if (battlePlugManager == null)
-        {
-            return;
-        }
-        
-        var atbSpeed = battlePlugManager.GetSpeed();
-        var multiplier = Plugin.Config.BattleATBSpeed.Value;
-        battlePlugManager.SetATBSpeed(atbSpeed * multiplier);
+        __result *= Plugin.Config.BattleATBSpeed.Value;
     }
 }
