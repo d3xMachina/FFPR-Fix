@@ -88,7 +88,7 @@ public sealed class ModConfiguration
              "Hack",
              "BattleWaitPlayerCommand",
              false,
-             "Prevent the enemies from attacking during your turn."
+             "Pause the battle when it's your turn. You can resume until the next unit is ready by pressing P or Select."
         );
 
         chocoboTurnFactor = _config.Bind(

@@ -9,7 +9,7 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 - Hide the field and world minimaps separately.
 - Change the player walk speed (to match the SNES for example).
 - Change the camera turn speed on a chocobo and on an airship.
-- Prevent enemies from attacking during your turn.
+- Pause the battle when it's your turn.
 - Speedup the game (speedhack).
 - Allow running on the world map.
 - Disable diagonal movements like on the SNES.

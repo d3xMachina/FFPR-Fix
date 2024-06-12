@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleState.cs" />
     <Compile Include="GameDetection.cs" />
     <Compile Include="ModConfiguration.cs" />
     <Compile Include="ModComponent.cs" />

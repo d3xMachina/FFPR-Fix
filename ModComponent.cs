@@ -3,6 +3,7 @@ using Il2CppSystem.Input.KeyConfig;
 using System;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FFPR_Fix;
 
@@ -14,6 +15,8 @@ public sealed class ModComponent : MonoBehaviour
     private float _lastGameTimeScale = 1f;
     private float _lastTimeScale = 1f;
 
+    private bool _keySelectUp = true;
+
     public int DefaultFrameRate = 60;
     public int LastFrameRate = 60;
     public bool FixGetFrameRate = false;
@@ -21,6 +24,8 @@ public sealed class ModComponent : MonoBehaviour
     public Vector2 LastPadAxis = new();
     public Vector2 LastPadAxisSanitized = new();
     public bool ProcessPadNoInput = false;
+
+    public BattleState CurrentBattleState = new();
 
     public ModComponent(IntPtr ptr) : base(ptr) { }
 
@@ -73,7 +78,7 @@ public sealed class ModComponent : MonoBehaviour
             }
             
             UpdateTimeScale();
-            
+            UpdateBattle();
         }
         catch (Exception e)
         {
@@ -94,7 +99,7 @@ public sealed class ModComponent : MonoBehaviour
         var gameTimeScale = timeScale != _lastTimeScale ? timeScale : _lastGameTimeScale; 
         var newTimeScale = gameTimeScale;
         
-        var keyPageUp = InputListener.Instance?.GetKey(Key.PageUp, KeyValue.InputDeviceType.GamePad) ?? false;
+        var keyPageUp = InputListener.Instance?.GetKey(Il2CppSystem.Input.Key.PageUp, KeyValue.InputDeviceType.GamePad) ?? false;
         if (keyPageUp || Input.GetKey(KeyCode.T))
         {
             var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
@@ -109,5 +114,21 @@ public sealed class ModComponent : MonoBehaviour
         _lastTimeScale = newTimeScale;
 
         Time.timeScale = newTimeScale;
+    }
+
+    private void UpdateBattle()
+    {
+        var keySelect = Gamepad.current?.selectButton.isPressed ?? false; // select button is not mapped in the game
+        keySelect = keySelect || Input.GetKey(KeyCode.P);
+
+        if (!keySelect)
+        {
+            _keySelectUp = true;
+        }
+        else if (_keySelectUp)
+        {
+            CurrentBattleState.PassTurn();
+            _keySelectUp = false;
+        }
     }
 }
