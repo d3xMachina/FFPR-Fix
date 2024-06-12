@@ -9,12 +9,12 @@ public class HideMinimapPatch
     [HarmonyPostfix]
     static void HideMinimap(MapUIManager __instance)
     {
-        if (Plugin.Config.hideFieldMinimap.Value)
+        if (Plugin.Config.HideFieldMinimap.Value)
         {
             __instance.SetActiveMinimap(false);
         }
 
-        if (Plugin.Config.hideWorldMinimap.Value)
+        if (Plugin.Config.HideWorldMinimap.Value)
         {
             __instance.SetActiveOverlayGps(false);
         }

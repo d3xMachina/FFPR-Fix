@@ -33,13 +33,13 @@ public partial class Plugin : BasePlugin
         var version = GameDetection.Version;
         bool mountRotatePatch = false;
 
-        if (Config.uncapFPS.Value || Config.enableVsync.Value)
+        if (Config.UncapFPS.Value || Config.EnableVsync.Value)
         {
             ApplyPatch(typeof(FrameratePatch));
             mountRotatePatch = true;
         }
 
-        if (Config.chocoboTurnFactor.Value != 1f || Config.airshipTurnFactor.Value != 1f)
+        if (Config.ChocoboTurnFactor.Value != 1f || Config.AirshipTurnFactor.Value != 1f)
         {
             mountRotatePatch = true;
         }
@@ -50,37 +50,37 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(ChocoboRotatePatch), GameVersion.FF3 | GameVersion.FF5 | GameVersion.FF6);
         }
 
-        if (Config.hideFieldMinimap.Value || Config.hideWorldMinimap.Value)
+        if (Config.HideFieldMinimap.Value || Config.HideWorldMinimap.Value)
         {
             ApplyPatch(typeof(HideMinimapPatch));
         }
 
-        if (Config.skipSplashscreens.Value || Config.skipPressAnyKey.Value)
+        if (Config.SkipSplashscreens.Value || Config.SkipPressAnyKey.Value)
         {
             ApplyPatch(typeof(SkipIntroPatch));
         }
 
-        if (Config.battleWaitPlayerCommand.Value)
+        if (Config.BattleWaitPlayerCommand.Value)
         {
             ApplyPatch(typeof(BattleWaitPlayerCommand), GameVersion.FF4 | GameVersion.FF5 | GameVersion.FF6);
         }
 
-        if (Config.battleATBSpeed.Value > 0f && Config.battleATBSpeed.Value != 1f)
+        if (Config.BattleATBSpeed.Value > 0f && Config.BattleATBSpeed.Value != 1f)
         {
             ApplyPatch(typeof(BattleATBSpeed), GameVersion.FF4 | GameVersion.FF5 | GameVersion.FF6);
         }
 
-        if (Config.playerWalkspeed.Value > 0f && Config.playerWalkspeed.Value != 1f)
+        if (Config.PlayerWalkspeed.Value > 0f && Config.PlayerWalkspeed.Value != 1f)
         {
             ApplyPatch(typeof(PlayerMoveSpeedPatch));
         }
 
-        if (Config.runOnWorldMap.Value)
+        if (Config.RunOnWorldMap.Value)
         {
             ApplyPatch(typeof(RunOnWorldMap));
         }
 
-        if (Config.disableDiagonalMovements.Value)
+        if (Config.DisableDiagonalMovements.Value)
         {
             ApplyPatch(typeof(DisableDiagonalMovements));
         }

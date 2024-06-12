@@ -103,7 +103,7 @@ public sealed class ModComponent : MonoBehaviour
         if (keyPageUp || Input.GetKey(KeyCode.T))
         {
             var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
-            var speedHackFactor = isBattle ? Plugin.Config.battleSpeedHackFactor.Value : Plugin.Config.outBattleSpeedHackFactor.Value;
+            var speedHackFactor = isBattle ? Plugin.Config.BattleSpeedHackFactor.Value : Plugin.Config.OutBattleSpeedHackFactor.Value;
             if (speedHackFactor > 0f)
             {
                 newTimeScale *= speedHackFactor;

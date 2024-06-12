@@ -42,7 +42,6 @@ public class BattleWaitPlayerCommand
         }
 
         ModComponent.Instance.CurrentBattleState.TurnPassed();
-        
     }
 
     [HarmonyPatch(typeof(BattleProgressATB), nameof(BattleProgressATB.UpdateAlways))]

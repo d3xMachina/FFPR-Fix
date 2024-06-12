@@ -62,7 +62,7 @@ public class ChocoboRotatePatch : MountRotate
         };
 
         // Backup the rotate values
-        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.chocoboTurnFactor.Value);
+        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.ChocoboTurnFactor.Value);
 
         // Skip the rotation code in the game method as we handled it
         __instance.rotateAccelerator = 0f;
@@ -96,7 +96,7 @@ public class AirshipRotatePatch : MountRotate
         };
 
         // Backup the rotate values
-        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.airshipTurnFactor.Value);
+        __state = HandleMountRotation(__instance, rotateData, __instance.inputAxis.x, Plugin.Config.AirshipTurnFactor.Value);
 
         // Skip the rotation code in the game method as we handled it
         __instance.rotateAccelerator = 0f;

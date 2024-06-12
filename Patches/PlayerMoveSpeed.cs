@@ -12,7 +12,7 @@ public class PlayerMoveSpeedPatch
         if (__instance.moveState == FieldPlayerConstants.MoveState.Walk ||
             __instance.moveState == FieldPlayerConstants.MoveState.Dush)
         {
-            __instance.EntityMoveMagnification *= Plugin.Config.playerWalkspeed.Value;
+            __instance.EntityMoveMagnification *= Plugin.Config.PlayerWalkspeed.Value;
         }
     }
     

@@ -10,7 +10,7 @@ public class SkipIntroPatch
     [HarmonyPostfix]
     static void SkipSplashscreens(ref SplashController __instance)
     {
-        if (Plugin.Config.skipSplashscreens.Value)
+        if (Plugin.Config.SkipSplashscreens.Value)
         {
             Plugin.Log.LogInfo("Skip splashscreen.");
             __instance.stateMachine?.Change(SplashController.State.Title);
@@ -21,7 +21,7 @@ public class SkipIntroPatch
     [HarmonyPostfix]
     static void SkipPressAnyKey(TitleWindowController __instance)
     {
-        if (Plugin.Config.skipPressAnyKey.Value)
+        if (Plugin.Config.SkipPressAnyKey.Value)
         {
             if (Last.Scene.SceneTitle.PreloadIsFinished())
             {

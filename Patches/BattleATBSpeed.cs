@@ -10,13 +10,13 @@ public class BattleATBSpeed
     static void InitStartBattle()
     {
         var battlePlugManager = BattlePlugManager.Instance();
-        if (battlePlugManager == null )
+        if (battlePlugManager == null)
         {
             return;
         }
         
         var atbSpeed = battlePlugManager.GetSpeed();
-        var multiplier = Plugin.Config.battleATBSpeed.Value;
+        var multiplier = Plugin.Config.BattleATBSpeed.Value;
         battlePlugManager.SetATBSpeed(atbSpeed * multiplier);
     }
 }

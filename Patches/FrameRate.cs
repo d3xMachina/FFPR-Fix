@@ -18,7 +18,7 @@ public class FrameratePatch
             ModComponent.Instance.DefaultFrameRate = Application.targetFrameRate;
             ModComponent.Instance.LastFrameRate = ModComponent.Instance.DefaultFrameRate;
 
-            if (Plugin.Config.enableVsync.Value)
+            if (Plugin.Config.EnableVsync.Value)
             {
                 Plugin.Log.LogInfo("VSync enabled.");
                 QualitySettings.vSyncCount = 1;
