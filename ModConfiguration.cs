@@ -140,7 +140,7 @@ public sealed class ModConfiguration
              "BackupSaveFiles",
              false,
              "Make a backup of the existing save when the game is saved. Saves are located in \"%USERPROFILE%\\Documents\\My Games\\FINAL FANTASY [GAME_VERSION] PR\\Steam\\[YOUR_ID]\"." +
-             "Backups have the .bak extension. Useful to recover from corrupted save files."
+             " Backups have the .bak extension. Useful to recover from corrupted save files."
         );
 
         UseDecryptedSaveFiles = _config.Bind(
