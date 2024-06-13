@@ -23,6 +23,15 @@ public class SkipIntroPatch
     {
         if (Plugin.Config.SkipPressAnyKey.Value)
         {
+            if (GameDetection.Version == GameVersion.FF5)
+            {
+                var titleWindowViewActive = __instance.view?.startParent?.active ?? false;
+                if (!titleWindowViewActive)
+                {
+                    return;
+                }
+            }
+
             if (Last.Scene.SceneTitle.PreloadIsFinished())
             {
                 Plugin.Log.LogInfo("Skip \"press any key\".");
