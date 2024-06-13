@@ -20,7 +20,8 @@ public sealed class ModConfiguration
     public ConfigEntry<float> BattleATBSpeed;
     public ConfigEntry<bool> RunOnWorldMap;
     public ConfigEntry<bool> DisableDiagonalMovements;
-    public ConfigEntry<bool> useDecryptedSaveFiles;
+    public ConfigEntry<bool> BackupSaveFiles;
+    public ConfigEntry<bool> UseDecryptedSaveFiles;
 
     public ModConfiguration(ConfigFile config)
     {
@@ -134,8 +135,16 @@ public sealed class ModConfiguration
              "Restrict the movements to 4 directions instead of 8, like on the SNES."
         );
 
-        useDecryptedSaveFiles = _config.Bind(
-             "Advanced",
+        BackupSaveFiles = _config.Bind(
+             "Save",
+             "BackupSaveFiles",
+             false,
+             "Make a backup of the existing save when the game is saved. Saves are located in \"%USERPROFILE%\\Documents\\My Games\\FINAL FANTASY [GAME_VERSION] PR\\Steam\\[YOUR_ID]\"." +
+             "Backups have the .bak extension. Useful to recover from corrupted save files."
+        );
+
+        UseDecryptedSaveFiles = _config.Bind(
+             "Save",
              "UseDecryptedSaveFiles",
              false,
              "USE AT YOUR OWN RISKS. BACKUP YOUR SAVES FIRST. The game won't encrypt the save files which will be in json format. It will only work with new saves."

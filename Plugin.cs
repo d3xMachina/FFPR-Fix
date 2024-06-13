@@ -30,7 +30,6 @@ public partial class Plugin : BasePlugin
 
     private void ApplyPatches()
     {
-        var version = GameDetection.Version;
         bool mountRotatePatch = false;
 
         if (Config.UncapFPS.Value || Config.EnableVsync.Value)
@@ -85,9 +84,13 @@ public partial class Plugin : BasePlugin
             ApplyPatch(typeof(DisableDiagonalMovements));
         }
 
-        if (Config.useDecryptedSaveFiles.Value)
+        if (Config.UseDecryptedSaveFiles.Value)
         {
             ApplyPatch(typeof(UseDecryptedSaveFiles));
+        }
+        else if (Config.BackupSaveFiles.Value) // already implemented in UseDecryptedSaveFiles
+        {
+            ApplyPatch(typeof(BackupSaveFiles));
         }
 
         Log.LogInfo("Patches applied!");
