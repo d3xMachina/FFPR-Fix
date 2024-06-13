@@ -20,7 +20,7 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 ## Installation
 
 - Install BepInEx Bleeding-Edge IL2CPP build from [here](https://builds.bepinex.dev/projects/bepinex_be/577/BepInEx_UnityIL2CPP_x64_ec79ad0_6.0.0-be.577.zip).
-- Drop the BepInEx folder from the mod archive in the game directory.
+- Drop the BepInEx folder from the mod archive in the game directory. (if playing FFVI, it's where "FINAL FANTASY VI.exe" is located)
 - Run the game once to generate the config file, change the config in "(GAME_PATH)\BepInEx\config\d3xMachina.ffpr_fix.cfg" and restart the game.
 
 ## License
