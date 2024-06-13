@@ -5,14 +5,17 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 ## Features
 
 - Uncap framerate (and fix input issues from higher framerate).
-- Skip the intro splashscreens and the following "press any key".
+- Skip the intro splashscreens and the following "Press any key".
 - Hide the field and world minimaps separately.
 - Change the player walk speed (to match the SNES for example).
 - Change the camera turn speed on a chocobo and on an airship.
 - Pause the battle when it's your turn.
+- Change the ATB gauge fill rate.
 - Speedup the game (speedhack).
 - Allow running on the world map.
 - Disable diagonal movements like on the SNES.
+- Automatic saves backup.
+- Use of decrypted saves. (AT YOUR OWN RISKS)
 
 ## Installation
 
