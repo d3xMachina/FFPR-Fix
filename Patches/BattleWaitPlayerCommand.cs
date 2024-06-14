@@ -51,7 +51,7 @@ public class BattleWaitPlayerCommand
         ref var battleState = ref ModComponent.Instance.CurrentBattleState;
 
         // Don't pause when escaping
-        var escaping = BattleUIManager.instance?.IsEscape() ?? false;
+        var escaping = BattleUIManager.Instance?.IsEscape() ?? false;
         battleState.Escaping = escaping;
 
         // Pause when we pass a turn and an other ally is ready

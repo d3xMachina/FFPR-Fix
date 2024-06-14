@@ -102,7 +102,7 @@ public sealed class ModComponent : MonoBehaviour
         var keyPageUp = InputListener.Instance?.GetKey(Il2CppSystem.Input.Key.PageUp, KeyValue.InputDeviceType.GamePad) ?? false;
         if (keyPageUp || Input.GetKey(KeyCode.T))
         {
-            var isBattle = Last.Battle.BattlePlugManager.instance?.IsBattle() ?? false;
+            var isBattle = Last.Battle.BattlePlugManager.Instance()?.IsBattle() ?? false;
             var speedHackFactor = isBattle ? Plugin.Config.BattleSpeedHackFactor.Value : Plugin.Config.OutBattleSpeedHackFactor.Value;
             if (speedHackFactor > 0f)
             {
