@@ -50,7 +50,7 @@ public class FrameratePatch
         var deltaTime = Time.unscaledDeltaTime;
         if (deltaTime > 0)
         {
-            var frameRate = (int) Mathf.Round(1f / deltaTime);
+            var frameRate = (int)Mathf.Round(1f / deltaTime);
             if (frameRate > 0)
             {
                 ModComponent.Instance.LastFrameRate = frameRate;
@@ -58,7 +58,7 @@ public class FrameratePatch
         }
 
         __result = ModComponent.Instance.LastFrameRate;
-        
+
         return false;
     }
 

@@ -100,7 +100,7 @@ public class RunOnWorldMap
     {
         var userDataManager = Last.Management.UserDataManager.Instance();
         var config = userDataManager?.Config;
-        
+
         if (config != null)
         {
             autoDash = config.IsAutoDash != 0;

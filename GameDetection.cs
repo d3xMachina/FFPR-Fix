@@ -18,21 +18,18 @@ public class GameDetection
 {
     private static GameVersion _version = GameVersion.Unknown;
     public static GameVersion Version
-    { 
+    {
         get
         {
-            if (_version ==  GameVersion.Unknown)
+            if (_version == GameVersion.Unknown)
             {
                 _version = GetGameVersion();
             }
             return _version;
         }
-        private set
-        {
-            _version = value;
-        }
+        private set => _version = value;
     }
-    
+
     private static GameVersion GetGameVersion()
     {
         switch (GetProductName())

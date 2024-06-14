@@ -20,11 +20,16 @@ public abstract class MountRotate
         rateFix *= customRate;
 
         var rotateScale = 1f;
-        if (inputX < 0) rotateScale = rotateData.left;
-        if (inputX > 0) rotateScale = rotateData.right;
+        if (inputX < 0)
+        {
+            rotateScale = rotateData.left;
+        }
+        else if (inputX > 0)
+        {
+            rotateScale = rotateData.right;
+        }
 
         var rotateAccelerator = rotateData.accelerator - inputX * 0.2f * rotateScale * rateFix;
-
         var sign = Mathf.Sign(rotateAccelerator);
         rotateAccelerator = Mathf.Min(rotateAccelerator * sign, rotateScale * 2 * rateFix) * sign;
 
@@ -41,7 +46,8 @@ public abstract class MountRotate
             rotateAccelerator = Mathf.Max(0, rotateAccelerator * sign) * sign;
         }
 
-        return new MountRotateData {
+        return new MountRotateData
+        {
             left = rotateData.left,
             right = rotateData.right,
             accelerator = rotateAccelerator,
@@ -55,7 +61,8 @@ public class ChocoboRotatePatch : MountRotate
     [HarmonyPrefix]
     static bool MountSpeedFixPre(FieldPlayerKeyGroundBirdController __instance, out MountRotateData __state)
     {
-        var rotateData = new MountRotateData {
+        var rotateData = new MountRotateData
+        {
             accelerator = __instance.rotateAccelerator,
             left = __instance.leftFastRotateScale,
             right = __instance.rightFastRotateScale
@@ -89,7 +96,8 @@ public class AirshipRotatePatch : MountRotate
     [HarmonyPrefix]
     static bool MountSpeedFixPre(FieldPlayerKeyAirshipController __instance, out MountRotateData __state)
     {
-        var rotateData = new MountRotateData {
+        var rotateData = new MountRotateData
+        {
             accelerator = __instance.rotateAccelerator,
             left = __instance.leftFastRotateScale,
             right = __instance.rightFastRotateScale

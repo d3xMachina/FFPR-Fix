@@ -26,7 +26,7 @@ public class UseDecryptedSaveFiles
         try
         {
             var spaceAvailable = SimpleDiskUtils.DiskUtils.CheckAvailableSpace();
-            var spaceNeeded = (int) Mathf.Ceil(target.Count * sizeof(byte) / 1024 / 1024);
+            var spaceNeeded = (int)Mathf.Ceil(target.Count * sizeof(byte) / 1024 / 1024);
             if (spaceAvailable < spaceNeeded)
             {
                 __result = FileOperationUtility.ResultCode.Storage;

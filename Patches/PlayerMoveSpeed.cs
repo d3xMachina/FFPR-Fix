@@ -15,6 +15,6 @@ public class PlayerMoveSpeedPatch
             __instance.EntityMoveMagnification *= Plugin.Config.PlayerWalkspeed.Value;
         }
     }
-    
+
     // For movespeed multipliers, check class FieldPlayerConstants
 }

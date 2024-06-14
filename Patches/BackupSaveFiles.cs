@@ -19,13 +19,13 @@ public class BackupSaveFiles
         try
         {
             var spaceAvailable = SimpleDiskUtils.DiskUtils.CheckAvailableSpace();
-            var spaceNeeded = (int) Mathf.Ceil(target.Count * sizeof(byte) / 1024 / 1024);
+            var spaceNeeded = (int)Mathf.Ceil(target.Count * sizeof(byte) / 1024 / 1024);
             if (spaceAvailable < spaceNeeded)
             {
                 __result = FileOperationUtility.ResultCode.Storage;
                 return false;
             }
-            
+
             if (File.Exists(fullPath))
             {
                 if (File.Exists(backupPath))

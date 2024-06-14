@@ -35,8 +35,10 @@ public sealed class ModComponent : MonoBehaviour
         var name = typeof(ModComponent).FullName;
 
         Plugin.Log.LogInfo($"Initializing game object {name}");
-        var modObject = new GameObject(name);
-        modObject.hideFlags = HideFlags.HideAndDontSave;
+        var modObject = new GameObject(name)
+        {
+            hideFlags = HideFlags.HideAndDontSave
+        };
         GameObject.DontDestroyOnLoad(modObject);
 
         Plugin.Log.LogInfo($"Adding {name} to game object...");
@@ -76,7 +78,7 @@ public sealed class ModComponent : MonoBehaviour
             {
                 return;
             }
-            
+
             UpdateTimeScale();
             UpdateBattle();
         }
@@ -96,9 +98,9 @@ public sealed class ModComponent : MonoBehaviour
             return;
         }
 
-        var gameTimeScale = timeScale != _lastTimeScale ? timeScale : _lastGameTimeScale; 
+        var gameTimeScale = timeScale != _lastTimeScale ? timeScale : _lastGameTimeScale;
         var newTimeScale = gameTimeScale;
-        
+
         var keyPageUp = InputListener.Instance?.GetKey(Il2CppSystem.Input.Key.PageUp, KeyValue.InputDeviceType.GamePad) ?? false;
         if (keyPageUp || Input.GetKey(KeyCode.T))
         {
