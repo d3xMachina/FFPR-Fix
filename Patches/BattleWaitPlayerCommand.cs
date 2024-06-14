@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using Last.Battle;
+using Last.Defaine.Master;
 using Last.Management;
 using Last.UI;
 using Last.UI.KeyInput;
@@ -41,7 +42,30 @@ public class BattleWaitPlayerCommand
             return;
         }
 
-        ModComponent.Instance.CurrentBattleState.TurnPassed();
+        // Ignore units who do nothing during their turn. The game doesn't even indicate in any way to the player they didn't act.
+        var nonAct = false;
+        if (battleActData.CurrentUseType == BattleActData.UseType.Ability)
+        {
+            nonAct = true;
+
+            var abilities = battleActData.abilityList;
+            if (abilities != null)
+            {
+                foreach (var ability in abilities)
+                {
+                    if (ability.TypeId != (int)AbilityType.NonAct)
+                    {
+                        nonAct = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!nonAct)
+        {
+            ModComponent.Instance.CurrentBattleState.TurnPassed();
+        }
     }
 
     [HarmonyPatch(typeof(BattleProgressATB), nameof(BattleProgressATB.UpdateAlways))]
