@@ -59,7 +59,7 @@ public class ChocoboRotatePatch : MountRotate
 {
     [HarmonyPatch(typeof(FieldPlayerKeyGroundBirdController), nameof(FieldPlayerKeyGroundBirdController.UpdateRotateAccelerator))]
     [HarmonyPrefix]
-    static bool MountSpeedFixPre(FieldPlayerKeyGroundBirdController __instance, out MountRotateData __state)
+    static void MountSpeedFixPre(FieldPlayerKeyGroundBirdController __instance, out MountRotateData __state)
     {
         var rotateData = new MountRotateData
         {
@@ -75,8 +75,6 @@ public class ChocoboRotatePatch : MountRotate
         __instance.rotateAccelerator = 0f;
         __instance.leftFastRotateScale = 0f;
         __instance.rightFastRotateScale = 0f;
-
-        return true;
     }
 
     [HarmonyPatch(typeof(FieldPlayerKeyGroundBirdController), nameof(FieldPlayerKeyGroundBirdController.UpdateRotateAccelerator))]
@@ -94,7 +92,7 @@ public class AirshipRotatePatch : MountRotate
 {
     [HarmonyPatch(typeof(FieldPlayerKeyAirshipController), nameof(FieldPlayerKeyAirshipController.UpdateRotateAccelerator))]
     [HarmonyPrefix]
-    static bool MountSpeedFixPre(FieldPlayerKeyAirshipController __instance, out MountRotateData __state)
+    static void MountSpeedFixPre(FieldPlayerKeyAirshipController __instance, out MountRotateData __state)
     {
         var rotateData = new MountRotateData
         {
@@ -110,8 +108,6 @@ public class AirshipRotatePatch : MountRotate
         __instance.rotateAccelerator = 0f;
         __instance.leftFastRotateScale = 0f;
         __instance.rightFastRotateScale = 0f;
-
-        return true;
     }
 
     [HarmonyPatch(typeof(FieldPlayerKeyAirshipController), nameof(FieldPlayerKeyAirshipController.UpdateRotateAccelerator))]

@@ -66,28 +66,11 @@ public class FrameratePatch
     // As this is always called on frame updates, we adjust the accumulation speed to match the new framerate
     [HarmonyPatch(typeof(TimeFunction), nameof(TimeFunction.Function))]
     [HarmonyPrefix]
-    static bool TimeFunctionFix(TimeFunction __instance, Action action, float waitTime, float acceleration, float waitTimeLowLimit, bool isAffectedTimeScale)
+    static void TimeFunctionFix(TimeFunction __instance, Action action, float waitTime, ref float acceleration, float waitTimeLowLimit, ref bool isAffectedTimeScale)
     {
-        var deltaTime = Time.unscaledDeltaTime;
-        if (deltaTime > 0)
-        {
-            __instance.checkTime += deltaTime;
-
-            var rateFix = ModComponent.Instance.DefaultFrameRate / (1f / deltaTime);
-            var waitTimeRemaining = waitTime - (__instance.Acceleration * rateFix);
-            if (waitTime != 0f && waitTimeRemaining <= waitTimeLowLimit)
-            {
-                waitTimeRemaining = waitTimeLowLimit;
-            }
-
-            if (waitTimeRemaining <= __instance.checkTime)
-            {
-                action?.Invoke();
-                __instance.checkTime = 0f;
-            }
-        }
-
-        __instance.Acceleration += acceleration;
-        return false;
+        var rateFix = ModComponent.Instance.DefaultFrameRate * Time.unscaledDeltaTime;
+        acceleration *= rateFix;
+        
+        isAffectedTimeScale = false;
     }
 }
