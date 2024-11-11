@@ -118,7 +118,7 @@ public sealed class ModConfiguration
              "Movement",
              "PlayerWalkspeed",
              1f,
-             "Change the player movement speed on the field (SNES is 0.75). Set to 0.75 and enable DisableDiagonalMovements to avoid stutters at 60fps."
+             "Change the player movement speed (SNES is 0.75). Set to 0.75 and enable DisableDiagonalMovements to avoid stutters at 60fps."
         );
 
         RunOnWorldMap = _config.Bind(
