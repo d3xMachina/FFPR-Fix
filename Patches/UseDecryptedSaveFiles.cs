@@ -2,7 +2,7 @@
 using Il2CppSystems.Files;
 using System;
 using System.IO;
-using UnhollowerBaseLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 
 namespace FFPR_Fix.Patches;

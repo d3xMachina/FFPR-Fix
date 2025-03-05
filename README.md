@@ -19,8 +19,9 @@ A BepInEx plugin containing a bunch of tweaks for Final Fantasy Pixel Remaster g
 
 ## Installation
 
-- Install BepInEx Bleeding-Edge IL2CPP build from [here](https://builds.bepinex.dev/projects/bepinex_be/577/BepInEx_UnityIL2CPP_x64_ec79ad0_6.0.0-be.577.zip).
-- Drop the BepInEx folder from the mod archive in the game directory. (if playing FFVI, it's where "FINAL FANTASY VI.exe" is located)
+- If you previously installed BepInEx and have a "mono" folder in the game directory, remove the "mono" and "BepInEx" folders.
+- Download BepInEx Bleeding-Edge IL2CPP build from [here](https://builds.bepinex.dev/projects/bepinex_be/733/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.733%2B995f049.zip) and extract the content to the game directory (if playing FFVI, it's where "FINAL FANTASY VI.exe" is located). Replace the files if asked.
+- Download the mod [here](https://github.com/d3xMachina/FFPR-Fix/releases/latest) and extract the content to the game directory. Replace the files if asked.
 - On Steam Deck, add to the Steam launch options : export WINEDLLOVERRIDES="winhttp=n,b"; %command%
 - Run the game once to generate the config file, change the config in "(GAME_PATH)\BepInEx\config\d3xMachina.ffpr_fix.cfg" and restart the game.
 

@@ -1,7 +1,7 @@
 ﻿using Il2CppSystem.Input;
 using Il2CppSystem.Input.KeyConfig;
 using System;
-using UnhollowerRuntimeLib;
+using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
