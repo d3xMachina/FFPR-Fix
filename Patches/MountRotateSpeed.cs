@@ -16,6 +16,11 @@ public abstract class MountRotate
     // Calculate and adjust the rotation accelerator to match the framerate for the chocobo and the airship
     protected static MountRotateData HandleMountRotation(FieldPlayerController controller, MountRotateData rotateData, float inputX, float customRate)
     {
+        // Names of constants deducted from FieldPlayerAirshipConstants class
+        const float DeltaRotateValue = 0.2f;
+        const float RotateDecelerateScale = 0.5f;
+        const float LimitRotateAccelerator = 2f;
+
         var rateFix = ModComponent.Instance.DefaultFrameRate * Time.unscaledDeltaTime;
         rateFix *= customRate;
 
@@ -29,9 +34,9 @@ public abstract class MountRotate
             rotateScale = rotateData.right;
         }
 
-        var rotateAccelerator = rotateData.accelerator - inputX * 0.2f * rotateScale * rateFix;
+        var rotateAccelerator = rotateData.accelerator - inputX * DeltaRotateValue * rotateScale * rateFix;
         var sign = Mathf.Sign(rotateAccelerator);
-        rotateAccelerator = Mathf.Min(rotateAccelerator * sign, rotateScale * 2 * rateFix) * sign;
+        rotateAccelerator = Mathf.Min(rotateAccelerator * sign, rotateScale * LimitRotateAccelerator * rateFix) * sign;
 
         if (rotateAccelerator != 0f)
         {
@@ -42,7 +47,7 @@ public abstract class MountRotate
                 mapHandle.SetZAxisRotateBirdCamera(newRotation);
             }
 
-            rotateAccelerator -= 0.2f * 0.5f * rateFix * sign;
+            rotateAccelerator -= DeltaRotateValue * RotateDecelerateScale * rateFix * sign;
             rotateAccelerator = Mathf.Max(0, rotateAccelerator * sign) * sign;
         }
 
